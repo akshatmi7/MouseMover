@@ -1,0 +1,56 @@
+==============================
+MouseMover - Stay Active
+==============================
+
+Description:
+-------------
+MouseMover is a simple Python program that moves your mouse slightly every 30 seconds. 
+This prevents your laptop from going idle or offline.
+
+Requirements:
+-------------
+1. Python 3.x must be installed.
+2. VS Code (or any text editor).
+3. Internet connection to install pyautogui.
+
+Setup and Installation:
+-----------------------
+1. Install Python from https://www.python.org/downloads/.
+   (During installation, check "Add to PATH".)
+   
+2. Install VS Code from https://code.visualstudio.com/.
+
+3. Open VS Code and create a new file:
+   - File > New File
+   - Save it as `mouse_mover.py`.
+
+4. Copy the following code into the file:
+------------------------------------------------
+import pyautogui
+import time
+
+while True:
+    pyautogui.moveRel(10, 0, duration=0.5)  # Move right
+    pyautogui.moveRel(-10, 0, duration=0.5) # Move left
+    time.sleep(30)  # Wait for 30 seconds
+------------------------------------------------
+
+5. Install pyautogui:
+   - Open the Terminal in VS Code (Ctrl + `).
+   - Type: `pip install pyautogui` and press Enter.
+
+6. Run the Program:
+   - In the terminal, type:
+     ```python
+     python mouse_mover.py
+     ```
+   - Your mouse will start moving automatically.
+
+7. Stop the Program:
+   - Press **Ctrl + C** in the terminal to stop it.
+
+Troubleshooting:
+----------------
+1. If you see "pyautogui not found" error, install it by running:
+   ```bash
+   pip install pyautogui
