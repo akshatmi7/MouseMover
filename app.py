@@ -1,36 +1,27 @@
-from flask import Flask, render_template
-import pyautogui
-import threading
-import time
+from flask import Flask, jsonify
+import os
 
 app = Flask(__name__)
 
-mouse_active = False
+# Check if running in Render (headless)
+if os.environ.get('RENDER') == 'true':
+    pyautogui = None
+else:
+    import pyautogui
 
-def move_mouse():
-    global mouse_active
-    while mouse_active:
-        pyautogui.moveRel(10, 0, duration=0.5)
-        pyautogui.moveRel(-10, 0, duration=0.5)
-        time.sleep(30)
 
-@app.route("/")
-def index():
-    return render_template("index.html")
+@app.route('/start')
+def start_mouse_mover():
+    if pyautogui:
+        pyautogui.moveTo(500, 500, duration=1)
+        return jsonify({"status": "Mouse mover started!"})
+    return jsonify({"status": "Running in headless mode. Mouse mover not available."})
 
-@app.route("/start")
-def start_mouse():
-    global mouse_active
-    if not mouse_active:
-        mouse_active = True
-        threading.Thread(target=move_mouse).start()
-    return {"status": "Mouse Mover Started"}
 
-@app.route("/stop")
-def stop_mouse():
-    global mouse_active
-    mouse_active = False
-    return {"status": "Mouse Mover Stopped"}
+@app.route('/stop')
+def stop_mouse_mover():
+    return jsonify({"status": "Mouse mover stopped!"})
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
