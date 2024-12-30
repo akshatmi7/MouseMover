@@ -10,6 +10,11 @@ else:
     import pyautogui
 
 
+@app.route('/')
+def home():
+    return jsonify({"message": "Welcome to the Mouse Mover app!"})
+
+
 @app.route('/start')
 def start_mouse_mover():
     if pyautogui:
