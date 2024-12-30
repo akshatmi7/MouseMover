@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, render_template, jsonify
 import os
 
 app = Flask(__name__)
@@ -12,7 +12,7 @@ else:
 
 @app.route('/')
 def home():
-    return jsonify({"message": "Welcome to the Mouse Mover app!"})
+    return render_template('index.html')  # Render the HTML file
 
 
 @app.route('/start')
