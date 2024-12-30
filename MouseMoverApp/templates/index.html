@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MouseMover - Stay Active</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #1f4037, #99f2c8);
+            color: #fff;
+            text-align: center;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 40px 60px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+        button {
+            background-color: #00b894;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            margin: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        button:hover {
+            background-color: #00cec9;
+            transform: translateY(-3px);
+        }
+        .stop {
+            background-color: #d63031;
+        }
+        .stop:hover {
+            background-color: #ff7675;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MouseMover - Keep Your System Awake</h1>
+        <p>A simple tool to prevent your computer from going idle. Stay online effortlessly.</p>
+        <button onclick="startMover()">Start Mouse Mover</button>
+        <button class="stop" onclick="stopMover()">Stop Mouse Mover</button>
+    </div>
+
+    <script>
+        async function startMover() {
+            let response = await fetch("/start");
+            let data = await response.json();
+            alert(data.status);
+        }
+
+        async function stopMover() {
+            let response = await fetch("/stop");
+            let data = await response.json();
+            alert(data.status);
+        }
+    </script>
+</body>
+</html>
